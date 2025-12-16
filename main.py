@@ -80,12 +80,10 @@ while True:
                 i.reset()
             # Check for Collision
             i.check_collision()
-            # Check for laser hits (lasers deal 1 damage, enemies have 2 health)
+            # Check for laser hits
             hits = pygame.sprite.spritecollide(i, var.lasers, True)
             if hits:
-                i.health -= len(hits)
-                if i.health <= 0:
-                    i.reset()
+                i.take_hits(len(hits))
 
         # Game Over
         if var.MULTIPLAYER:
