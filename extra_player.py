@@ -41,6 +41,6 @@ class Player(pygame.sprite.Sprite):
                     if var.PLAYER_2_SPEED > 1:
                         var.PLAYER_2_SPEED = 1
 
-        # Reset Button
-        if keys[pygame.K_r] | keys[pygame.K_SPACE]:
+        # Reset Button (keep on 'R' so spacebar can be used for shooting)
+        if keys[pygame.K_r]:
             game_over.reset()

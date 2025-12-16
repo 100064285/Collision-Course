@@ -80,6 +80,10 @@ while True:
                 i.reset()
             # Check for Collision
             i.check_collision()
+            # Check for laser hits
+            hits = pygame.sprite.spritecollide(i, var.lasers, True)
+            if hits:
+                i.take_hits(len(hits))
 
         # Game Over
         if var.MULTIPLAYER:
@@ -121,6 +125,7 @@ while True:
             all_sprites.draw(screen)
             var.all_enemies.update()
             player.update()
+            var.lasers.update()
     elif game_state == "title":
         title_font = pygame.font.Font(None, 48)
         title.fill([50, 50, 200])
