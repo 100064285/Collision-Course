@@ -64,9 +64,12 @@ class Player(pygame.sprite.Sprite):
 class Laser(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super(Laser, self).__init__()
-        # Simple rectangle laser for now
-        self.image = pygame.Surface([6, 20])
-        self.image.fill((255, 255, 0))
+        # Laser sprite (fallback to a simple rectangle if the image is missing)
+        try:
+            self.image = pygame.image.load("assets/lasers/laserBlue07.png").convert_alpha()
+        except pygame.error:
+            self.image = pygame.Surface([6, 20])
+            self.image.fill((255, 255, 0))
         self.rect = self.image.get_rect()
         self.rect.centerx = x
         self.rect.bottom = y
