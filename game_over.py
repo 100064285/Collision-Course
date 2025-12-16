@@ -19,7 +19,10 @@ def run():
     scorepos.centery = vars.screen.get_rect().centery * 2/5
     # Add to Screen
 
-    # Reset is handled elsewhere ('R' key)
+    # Handle reset while on game over screen: press 'R' to restart
+    keys = pygame.key.get_pressed()
+    if vars.GAME_OVER and keys[pygame.K_r]:
+        reset()
     # Multiplayer
     if vars.MULTIPLAYER:
         score = font.render(f"Player 1 Score: {vars.SCORE}", 1, (10, 10, 10), (0, 0, 255))
