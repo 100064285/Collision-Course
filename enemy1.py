@@ -1,4 +1,3 @@
-# Imports
 import random
 import pygame
 import variables as vars
@@ -10,12 +9,28 @@ import variables as vars
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
-        # Create Image
-        self.image = pygame.Surface([120, 120])
-        self.image.fill([random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)])
-        # Create Bounding Box
+        # Choose a random meteor sprite (brown or grey, big size)
+        meteor_choices = [
+            "assets/meteors/meteorBrown_big1.png",
+            "assets/meteors/meteorBrown_big2.png",
+            "assets/meteors/meteorBrown_big3.png",
+            "assets/meteors/meteorBrown_big4.png",
+            "assets/meteors/meteorGrey_big1.png",
+            "assets/meteors/meteorGrey_big2.png",
+            "assets/meteors/meteorGrey_big3.png",
+            "assets/meteors/meteorGrey_big4.png",
+        ]
+        try:
+            image_path = random.choice(meteor_choices)
+            self.image = pygame.image.load(image_path).convert_alpha()
+        except pygame.error:
+            # Fallback to a simple colored square if images are missing
+            self.image = pygame.Surface([120, 120])
+            self.image.fill([random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)])
+
+        # Create Bounding Box that matches sprite size
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, vars.SCREEN_WIDTH)
+        self.rect.x = random.randint(0, max(0, vars.SCREEN_WIDTH - self.rect.width))
         # Health: takes 2 laser hits to destroy
         self.health = 2
 
@@ -30,9 +45,27 @@ class Enemy(pygame.sprite.Sprite):
             self.rect.y += vars.L1_ENEMY_SPEED * vars.GAME_SPEED
 
     def reset(self):
-        # Reset to Top of Screen
+        # Reset to Top of Screen with a (possibly) new random meteor sprite
+        meteor_choices = [
+            "assets/meteors/meteorBrown_big1.png",
+            "assets/meteors/meteorBrown_big2.png",
+            "assets/meteors/meteorBrown_big3.png",
+            "assets/meteors/meteorBrown_big4.png",
+            "assets/meteors/meteorGrey_big1.png",
+            "assets/meteors/meteorGrey_big2.png",
+            "assets/meteors/meteorGrey_big3.png",
+            "assets/meteors/meteorGrey_big4.png",
+        ]
+        try:
+            image_path = random.choice(meteor_choices)
+            self.image = pygame.image.load(image_path).convert_alpha()
+        except pygame.error:
+            self.image = pygame.Surface([120, 120])
+            self.image.fill([random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)])
+
+        self.rect = self.image.get_rect()
         self.rect.y = 0
-        self.rect.x = random.randint(0, vars.SCREEN_WIDTH)
+        self.rect.x = random.randint(0, max(0, vars.SCREEN_WIDTH - self.rect.width))
         self.health = 2
 
     def check_collision(self):
