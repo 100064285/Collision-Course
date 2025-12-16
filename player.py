@@ -10,9 +10,12 @@ import variables as var
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        # Create Image
-        self.image = pygame.Surface([50, 50])
-        self.image.fill([76, 52, 235])
+        # Create Image (try to load a spaceship sprite, fall back to a square)
+        try:
+            self.image = pygame.image.load("assets/ships/playerShip1_blue.png").convert_alpha()
+        except pygame.error:
+            self.image = pygame.Surface([50, 50])
+            self.image.fill([76, 52, 235])
         # Create Bounding Box
         self.rect = self.image.get_rect()
         self.rect.y = var.SCREEN_HEIGHT / 1.5
