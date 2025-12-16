@@ -16,6 +16,8 @@ class Enemy(pygame.sprite.Sprite):
         # Create Bounding Box
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(0, vars.SCREEN_WIDTH)
+        # Health: takes 2 laser hits to destroy
+        self.health = 2
 
         self.angle = 0
         self.rotation_speed = random.randint(1, 10)
@@ -31,6 +33,7 @@ class Enemy(pygame.sprite.Sprite):
         # Reset to Top of Screen
         self.rect.y = 0
         self.rect.x = random.randint(0, vars.SCREEN_WIDTH)
+        self.health = 2
 
     def check_collision(self):
         # Check for Player Collision

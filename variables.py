@@ -10,6 +10,7 @@ from button import Button, OnePlayer, TwoPlayer
 # Groups
 all_sprites = pygame.sprite.Group()
 all_enemies = pygame.sprite.Group()
+lasers = pygame.sprite.Group()
 
 # Game
 SCREEN_WIDTH = 1280
@@ -21,7 +22,7 @@ title_screen = screen.__copy__()
 PLAYER_SPEED = 1
 PLAYER_2_SPEED = 1
 GAME_SPEED = 1
-L1_ENEMY_SPEED = 10
+L1_ENEMY_SPEED = 4
 SCORE = 0
 LIVES = 3
 GAME_OVER = False
